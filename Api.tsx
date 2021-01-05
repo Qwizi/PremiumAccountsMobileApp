@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {AxiosInstance} from "axios";
+import tokenStorage from "./TokenStorage";
 
 class Api {
     private axios: AxiosInstance;
@@ -8,6 +9,18 @@ class Api {
         this.axios = axios.create({
             baseURL: url
         })
+        // Axios interceptor
+        this.axios.interceptors.request.use(
+            config => {
+                return tokenStorage.getToken().then(token => {
+                    if (token) config.headers['Authorization'] = 'Bearer ' + token;
+                    return config;
+                })
+            },
+            error => {
+                Promise.reject(error);
+            }
+        )
     }
     // Rejestracja uzytkownika
     async registerUser(username: string, password: string): Promise<any> {
