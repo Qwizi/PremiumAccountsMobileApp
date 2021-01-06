@@ -5,6 +5,7 @@ import tokenStorage from "./TokenStorage";
 import {User} from "./App.interfaces";
 import {ApplicationProvider, Layout} from "@ui-kitten/components";
 import * as eva from '@eva-design/eva';
+import AuthScreen from "./screens/AuthScreen";
 
 export default function App() {
     const [user, setUser] = useState<User>({})
@@ -84,11 +85,11 @@ export default function App() {
         await loginUser("Qwizi", "tuja5422");
     }
 
+    let screens = logged ? <div>123</div> : <AuthScreen />;
+
     return (
         <ApplicationProvider {...eva} theme={eva.dark}>
-            <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                Test
-            </Layout>
+            {screens}
         </ApplicationProvider>
     );
 }
