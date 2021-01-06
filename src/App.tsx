@@ -3,6 +3,8 @@ import {Button, StyleSheet, Text, View} from 'react-native';
 import api from './Api';
 import tokenStorage from "./TokenStorage";
 import {User} from "./App.interfaces";
+import {ApplicationProvider, Layout} from "@ui-kitten/components";
+import * as eva from '@eva-design/eva';
 
 export default function App() {
     const [user, setUser] = useState<User>({})
@@ -83,17 +85,10 @@ export default function App() {
     }
 
     return (
-        <View>
-            Test
-        </View>
+        <ApplicationProvider {...eva} theme={eva.dark}>
+            <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                Test
+            </Layout>
+        </ApplicationProvider>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
