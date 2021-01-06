@@ -2,16 +2,11 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, Layout, Text } from '@ui-kitten/components';
+import LoginScreen from "./LoginScreen";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function AuthScreen(props: any) {
-
-    const LoginScreen = () => (
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text category='h1'>Logowanie</Text>
-        </Layout>
-    )
 
     const RegisterScreen = () => (
         <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -31,7 +26,10 @@ export default function AuthScreen(props: any) {
 
     const TabNavigator = () => (
         <Navigator tabBar={props => <BottomTabBar {...props} />}>
-            <Screen name='Logowanie' component={LoginScreen}/>
+            <Screen name='Logowanie' component={() => <LoginScreen
+                setUserData={props.setUserData}
+                setLogged={props.setLogged}
+            />}/>
             <Screen name='Rejestracja' component={RegisterScreen}/>
         </Navigator>
     );
