@@ -62,7 +62,10 @@ export default function App() {
                 setLogged(true);
             }
         } catch (e) {
-            console.log(e.response.data);
+            console.log(e);
+            if (e.response && e.response.data) {
+                console.log(e.response.data)
+            }
         }
     }
 
@@ -85,7 +88,10 @@ export default function App() {
         await loginUser("Qwizi", "tuja5422");
     }
 
-    let screens = logged ? <div>123</div> : <AuthScreen />;
+    let screens = logged ? <div>123</div> : <AuthScreen
+        setLogged={setLogged}
+        setUserData={setUserData}
+    />;
 
     return (
         <ApplicationProvider {...eva} theme={eva.dark}>
