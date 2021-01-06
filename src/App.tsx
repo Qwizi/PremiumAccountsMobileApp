@@ -2,10 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import api from './Api';
 import tokenStorage from "./TokenStorage";
+import {User} from "./App.interfaces";
 
 export default function App() {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState<User>({})
     const [logged, setLogged] = useState(false);
+
     useEffect(() => {
         (async () => {
             await checkUserIsLogged()
@@ -81,11 +83,8 @@ export default function App() {
     }
 
     return (
-        <View style={styles.container}>
-            <Text>Open up Ap.tsx to start working on your app!</Text>
-            <Button title={'Zarejestruj'} onPress={testRegisterUser}/>
-            <Button title={'Zaloguj'} onPress={testLoginUser}/>
-            <Button title={'Wyloguj'} onPress={logoutUser}/>
+        <View>
+            Test
         </View>
     );
 }
