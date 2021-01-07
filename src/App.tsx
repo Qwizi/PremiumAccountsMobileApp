@@ -5,8 +5,8 @@ import tokenStorage from "./TokenStorage";
 import {User} from "./App.interfaces";
 import {ApplicationProvider, Layout, Spinner} from "@ui-kitten/components";
 import * as eva from '@eva-design/eva';
-import AuthScreen from "./screens/AuthScreen";
-import MainScreen from "./screens/MainScreen";
+import AuthNavigation from "./components/AuthNavigation";
+import MainNavigation from "./components/MainNavigation";
 
 export default function App() {
     const [user, setUser] = useState<User>({})
@@ -27,7 +27,7 @@ export default function App() {
                 setLogged(false);
             }
         } catch (e) {
-            console.log(e.response.data);
+            console.log(e.response);
         }
     }
 
@@ -38,7 +38,7 @@ export default function App() {
                 setUser(response.data);
             }
         } catch (e) {
-            console.log(e.response.data);
+            console.log(e);
             await logoutUser();
         }
     }
@@ -95,12 +95,12 @@ export default function App() {
     if (logged === undefined) {
         screens =  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Spinner size='giant'/></Layout>;
     } else if (!logged) {
-        screens = <AuthScreen
+        screens = <AuthNavigation
             setLogged={setLogged}
             setUserData={setUserData}
         />
     } else {
-        screens = <MainScreen />
+        screens = <MainNavigation />
     }
 
     /*(screens = logged ? <MainScreen /> : <AuthScreen

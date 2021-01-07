@@ -2,12 +2,12 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab, Layout, Text } from '@ui-kitten/components';
-import LoginScreen from "./LoginScreen";
-import RegisterScreen from "./RegisterScreen";
+import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
-export default function AuthScreen(props: any) {
+export default function AuthNavigation(props: any) {
 
 
     // @ts-ignore
@@ -35,5 +35,4 @@ export default function AuthScreen(props: any) {
             <TabNavigator />
         </NavigationContainer>
     )
-
 }
