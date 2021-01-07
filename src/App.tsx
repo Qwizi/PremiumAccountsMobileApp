@@ -6,6 +6,7 @@ import {User} from "./App.interfaces";
 import {ApplicationProvider, Layout} from "@ui-kitten/components";
 import * as eva from '@eva-design/eva';
 import AuthScreen from "./screens/AuthScreen";
+import MainScreen from "./screens/MainScreen";
 
 export default function App() {
     const [user, setUser] = useState<User>({})
@@ -88,7 +89,7 @@ export default function App() {
         await loginUser("Qwizi", "tuja5422");
     }
 
-    let screens = logged ? <div>123</div> : <AuthScreen
+    let screens = logged ? <MainScreen /> : <AuthScreen
         setLogged={setLogged}
         setUserData={setUserData}
     />;
