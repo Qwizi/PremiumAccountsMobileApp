@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Button, Card, Input, Layout, List, ListItem, Text} from "@ui-kitten/components";
 import api from "../Api";
 import tokenStorage from "../TokenStorage";
 
-export default function LoginScreen(props: any) {
+export default function RegisterScreen(props: any) {
     const [usernameValue, setUsernameValue] = useState('');
     const [usernameValidate, setUsernameValidate] = useState<undefined | boolean>(undefined);
     const [usernameErrors, setUsernameErrors] = useState<string[]>([''])
@@ -18,20 +18,15 @@ export default function LoginScreen(props: any) {
     const [errors, setErrors] = useState<string[]>([''])
 
 
-    async function loginUser(username: string, password: string) {
+    async function registerUser(username: string, password: string) {
         try {
-            const response = await api.loginUser(username, password)
-            if (response.status === 201) {
+            const response = await api.registerUser(username, password);
+            if (response.status === 200) {
                 console.log(response.data);
-                const token = response.data.access_token;
-                await tokenStorage.setToken(token);
-                await props.setUserData();
-                props.setLogged(true);
-                setButtonDisabled(true);
                 setErrors(['']);
             }
         } catch (e) {
-            console.log(e);
+            console.log(e.response.data);
             if (e.response && e.response.data) {
                 setErrors(['', e.response.data.message])
                 setButtonDisabled(false);
@@ -103,10 +98,10 @@ export default function LoginScreen(props: any) {
         return validateStatus;
     }
 
-    async function handleClickLoginBtn() {
+    async function handleClickRegisterBtn() {
         Promise.all([validateUsernameValue(), validatePasswordValue()]).then(async (values) => {
             if (values[0] && values[1]) {
-                await loginUser(usernameValue, passwordValue);
+                await registerUser(usernameValue, passwordValue);
             }
         })
     }
@@ -145,7 +140,7 @@ export default function LoginScreen(props: any) {
 
     return (
         <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text category='h1' style={{marginBottom: '15px'}}>Zaloguj sie</Text>
+            <Text category='h1' style={{marginBottom: '15px'}}>Zarejestruj sie</Text>
             {errorAlert}
             {usernameErrorAlert}
             <Input
@@ -168,9 +163,9 @@ export default function LoginScreen(props: any) {
             />
             <Button
                 style={{marginTop: '5px'}}
-                onPress={handleClickLoginBtn}
+                onPress={handleClickRegisterBtn}
                 disabled={buttonDisabled}
-            >Zaloguj
+            >Zarejestruj
             </Button>
         </Layout>
     )
