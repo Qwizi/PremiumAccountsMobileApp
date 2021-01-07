@@ -140,7 +140,7 @@ export default function RegisterScreen(props: any) {
 
     return (
         <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text category='h1' style={{marginBottom: '15px'}}>Zarejestruj sie</Text>
+            <Text category='h1' style={{marginBottom: 15}}>Zarejestruj sie</Text>
             {errorAlert}
             {usernameErrorAlert}
             <Input

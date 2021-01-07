@@ -145,7 +145,7 @@ export default function LoginScreen(props: any) {
 
     return (
         <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text category='h1' style={{marginBottom: '15px'}}>Zaloguj sie</Text>
+            <Text category='h1' style={{marginBottom: 15}}>Zaloguj sie</Text>
             {errorAlert}
             {usernameErrorAlert}
             <Input
