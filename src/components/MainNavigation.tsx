@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
-import SearchScreen from "./SearchScreen";
+import { BottomNavigation, BottomNavigationTab,TopNavigation, TopNavigationAction, Divider} from '@ui-kitten/components';
+import SearchScreen from "../screens/SearchScreen";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
-export default function MainScreen(props: any) {
+export default function MainNavigation(props: any) {
 
     // @ts-ignore
     const BottomTabBar = ({ navigation, state }) => (
