@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Fragment} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import api from './Api';
 import tokenStorage from "./TokenStorage";
 import {User} from "./App.interfaces";
-import {ApplicationProvider, Layout, Spinner} from "@ui-kitten/components";
+import {ApplicationProvider, IconRegistry, Layout, Spinner} from "@ui-kitten/components";
 import * as eva from '@eva-design/eva';
 import AuthNavigation from "./components/AuthNavigation";
 import MainNavigation from "./components/MainNavigation";
+import {EvaIconsPack} from "@ui-kitten/eva-icons";
 
 export default function App() {
     const [user, setUser] = useState<User>({})
@@ -109,8 +110,11 @@ export default function App() {
     />;*/
 
     return (
-        <ApplicationProvider {...eva} theme={eva.dark}>
-            {screens}
-        </ApplicationProvider>
+        <Fragment>
+            <IconRegistry icons={EvaIconsPack}/>
+            <ApplicationProvider {...eva} theme={eva.dark}>
+                {screens}
+            </ApplicationProvider>
+        </Fragment>
     );
 }
