@@ -3,14 +3,14 @@ import {Button, StyleSheet, Text, View} from 'react-native';
 import api from './Api';
 import tokenStorage from "./TokenStorage";
 import {User} from "./App.interfaces";
-import {ApplicationProvider, Layout} from "@ui-kitten/components";
+import {ApplicationProvider, Layout, Spinner} from "@ui-kitten/components";
 import * as eva from '@eva-design/eva';
 import AuthScreen from "./screens/AuthScreen";
 import MainScreen from "./screens/MainScreen";
 
 export default function App() {
     const [user, setUser] = useState<User>({})
-    const [logged, setLogged] = useState(false);
+    const [logged, setLogged] = useState<undefined | boolean>(undefined);
 
     useEffect(() => {
         (async () => {
@@ -23,6 +23,8 @@ export default function App() {
             if (await tokenStorage.getToken()) {
                 await setUserData();
                 setLogged(true);
+            } else {
+                setLogged(false);
             }
         } catch (e) {
             console.log(e.response.data);
@@ -88,11 +90,23 @@ export default function App() {
         console.log('Kliknieto')
         await loginUser("Qwizi", "tuja5422");
     }
+    let screens;
 
-    let screens = logged ? <MainScreen /> : <AuthScreen
+    if (logged === undefined) {
+        screens =  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Spinner size='giant'/></Layout>;
+    } else if (!logged) {
+        screens = <AuthScreen
+            setLogged={setLogged}
+            setUserData={setUserData}
+        />
+    } else {
+        screens = <MainScreen />
+    }
+
+    /*(screens = logged ? <MainScreen /> : <AuthScreen
         setLogged={setLogged}
         setUserData={setUserData}
-    />;
+    />;*/
 
     return (
         <ApplicationProvider {...eva} theme={eva.dark}>

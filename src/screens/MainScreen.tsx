@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigation, BottomNavigationTab} from '@ui-kitten/components';
+import SearchScreen from "./SearchScreen";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -20,7 +21,7 @@ export default function MainScreen(props: any) {
 
     const TabNavigator = () => (
         <Navigator tabBar={props => <BottomTabBar {...props} />}>
-            <Screen name='Wyszukiwanie' component={() => <div>1</div>}/>
+            <Screen name='Wyszukiwanie' component={() => <SearchScreen />}/>
             <Screen name='Ulubione' component={() => <div>2</div>}/>
             <Screen name='Moje konto' component={() => <div>3</div>}/>
         </Navigator>
